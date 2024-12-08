@@ -4,6 +4,6 @@ import { FoodScanHistoryController } from './food-scan-history.controller';
 
 @Module({
   providers: [FoodScanHistoryService],
-  controllers: [FoodScanHistoryController]
+  controllers: [FoodScanHistoryController],
 })
 export class FoodScanHistoryModule {}

@@ -9,7 +9,9 @@ describe('FoodScanHistoryController', () => {
       controllers: [FoodScanHistoryController],
     }).compile();
 
-    controller = module.get<FoodScanHistoryController>(FoodScanHistoryController);
+    controller = module.get<FoodScanHistoryController>(
+      FoodScanHistoryController,
+    );
   });
 
   it('should be defined', () => {
