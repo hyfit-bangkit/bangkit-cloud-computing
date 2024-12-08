@@ -1,11 +1,5 @@
-import { Gender } from 'src/gender/gender.entity';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Gender } from 'src/dto/register.dto';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -24,10 +18,6 @@ export class User {
   @Column({ nullable: true })
   avatar_url: string;
 
-  @ManyToOne(() => Gender)
-  @JoinColumn({ name: 'gender_id' })
-  gender: Gender;
-
   @Column({ nullable: true })
   bio: string;
 
@@ -39,6 +29,16 @@ export class User {
 
   @Column({ type: 'date', nullable: true })
   date_of_birth: Date;
+
+  @Column()
+  password: string;
+
+  @Column({
+    type: 'enum',
+    enum: Gender,
+    nullable: true,
+  })
+  gender: Gender;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

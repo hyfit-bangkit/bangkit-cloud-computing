@@ -1,9 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { GenderController } from './gender/gender.controller';
-import { GenderService } from './gender/gender.service';
-import { GenderModule } from './gender/gender.module';
 import { FoodItemsController } from './food-items/food-items.controller';
 import { FoodItemsModule } from './food-items/food-items.module';
 import { IngredientsService } from './ingredients/ingredients.service';
@@ -15,12 +11,11 @@ import { FoodScanHistoryModule } from './food-scan-history/food-scan-history.mod
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
-    AuthModule,
     UserModule,
-    GenderModule,
     FoodItemsModule,
     IngredientsModule,
     FoodItemIngredientModule,
@@ -41,14 +36,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         database: configService.get<string>('DB_NAME'),
         entities: [join(__dirname, '**/**.entity{.ts,.js}')],
         synchronize: true,
+        logging: true,
       }),
     }),
+    JwtModule,
   ],
-  controllers: [
-    GenderController,
-    FoodItemsController,
-    FoodItemIngredientController,
-  ],
-  providers: [GenderService, IngredientsService, FoodItemIngredientService],
+  controllers: [FoodItemsController, FoodItemIngredientController],
+  providers: [IngredientsService, FoodItemIngredientService],
 })
 export class AppModule {}
