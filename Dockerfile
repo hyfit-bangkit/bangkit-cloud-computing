@@ -27,6 +27,9 @@ RUN npm install --omit=dev
 # Copy the built application from the builder stage
 COPY --from=builder /usr/src/app/dist ./dist
 
+# Copy production environment variables
+COPY .env.prod ./
+
 # Expose the port your app runs on
 EXPOSE 3000
 
