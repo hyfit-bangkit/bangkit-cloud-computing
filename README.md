@@ -93,3 +93,79 @@ Response Success:
     }
 }
 ```
+
+### User / Profile
+
+#### Get Profile Endpoint
+
+Method: GET
+
+Endpoint: {baseUrl}/api/v1/profile
+
+Authorization: Bearer Token
+
+Response Success:
+
+```json
+{
+    "status": "success",
+    "message": "User found!",
+    "data": {
+        "full_name": "string",
+        "bio": "string",
+        "height": number,
+        "weight": number,
+        "age": number
+    }
+}
+```
+
+#### Update Profile Endpoint
+
+Method: PATCH
+
+Endpoint: {baseUrl}/api/v1/profile
+
+Authorization: Bearer Token
+
+Request Body: 
+
+```json
+{
+    "full_name": "string",
+    "avatar_url": "string",
+    "bio": "string",
+    "height": number,
+    "weight": number,
+    "date_of_birth": "string", # e.g 1995-05-12
+    "gender": "enum" # male || female
+}
+```
+
+Response Success:
+
+```json
+{
+    "status": "success",
+    "message": "Profile updated successfully",
+    "data": {
+        "full_name": "string",
+        "avatar_url": "string",
+        "bio": "string",
+        "height": number,
+        "weight": number,
+        "date_of_birth": "string", # e.g 1995-05-12
+        "gender": "enum" # male || female
+    }
+}
+```
+
+#### Delete Profile Endpoint
+
+Method: DELETE
+
+Endpoint: {baseUrl}/api/v1/profile
+
+Authorization: Bearer Token
+
+Response Success: [204 (No Content)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204)

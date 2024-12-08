@@ -83,4 +83,63 @@ export class UserService {
     const accessToken = await this.jwtAuthService.generateToken(user);
     return { accessToken };
   }
+
+  async validateTokenAndGetUser(authHeader: string): Promise<User> {
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      throw new HttpException('Token is required', HttpStatus.UNAUTHORIZED);
+    }
+
+    const token = authHeader.split(' ')[1];
+    const payload = await this.jwtAuthService.validateToken(token);
+
+    const user = await this.userRepository.findOne({
+      where: { id: payload.sub },
+    });
+
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    return user;
+  }
+
+  async user(authHeader: string): Promise<any> {
+    const user = await this.validateTokenAndGetUser(authHeader);
+
+    const currentYear = new Date().getFullYear();
+    const birthYear = user.date_of_birth
+      ? new Date(user.date_of_birth).getFullYear()
+      : null;
+    const age = birthYear ? currentYear - birthYear : null;
+
+    return {
+      full_name: user.full_name,
+      bio: user.bio,
+      height: user.height,
+      weight: user.weight,
+      age: age,
+    };
+  }
+
+  async editUser(authHeader: string, updateData: any): Promise<any> {
+    const user = await this.validateTokenAndGetUser(authHeader);
+
+    const updatedUser = Object.assign(user, updateData);
+    await this.userRepository.save(updatedUser);
+
+    return {
+      full_name: updatedUser.full_name,
+      avatar_url: updatedUser.avatar_url,
+      bio: updatedUser.bio,
+      weight: updatedUser.weight,
+      height: updatedUser.height,
+      date_of_birth: updatedUser.date_of_birth,
+      gender: updatedUser.gender,
+    };
+  }
+
+  async deleteUser(authHeader: string): Promise<void> {
+    const user = await this.validateTokenAndGetUser(authHeader);
+    await this.userRepository.delete(user.id);
+  }
 }

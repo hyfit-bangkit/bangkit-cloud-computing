@@ -1,4 +1,5 @@
 import {
+  IsDateString,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -45,7 +46,7 @@ export class RegisterDTO {
   @IsOptional()
   bio: string;
 
-  @IsString()
+  @IsDateString()
   @IsOptional()
   date_of_birth: string;
 
