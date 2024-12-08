@@ -46,10 +46,10 @@ Response Success:
         "bio": "string",
         "weight": number,
         "height": number,
-        "password": "string",
+        "password": "string", # hashed
         "gender": "enum", # male || female
         "created_at": "timestamp",
-        "is_active": boolean,
+        "is_active": boolean, # default true
         "avatar_url": null,
         "date_of_birth": null,
         "updated_at": null,
@@ -77,8 +77,8 @@ Request Body:
 
 ```json
 {
-    "username": "renza",
-	"password": "unikaoke"
+    "username": "string",
+    "password": "string"
 }
 ```
 
