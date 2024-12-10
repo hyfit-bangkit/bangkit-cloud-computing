@@ -8,7 +8,7 @@ docker-compose up -d
 
 ## Production Environment
 
-baseUrl: https://hyfit-715678994976.asia-southeast2.run.app
+baseUrl: [https://hyfit-45761124621.asia-southeast2.run.app](https://hyfit-45761124621.asia-southeast2.run.app)
 
 ### Authentication
 
