@@ -29,7 +29,8 @@ Request Body:
     "weight": number,
     "height": number,
     "bio": "string",
-    "gender": "enum" # male || female
+    "gender": "enum", # male || female
+    "date_of_birth": "1990-01-01"
 }
 ```
 
@@ -62,8 +63,7 @@ Optional Payload Request:
 
 ```json
 {
-    "avatar_url": "string",
-    "date_of_birth": "string",
+    "avatar_url": "string"
 }
 ```
 
